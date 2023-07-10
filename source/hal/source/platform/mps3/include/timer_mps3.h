@@ -26,6 +26,10 @@
     #include "ethosu_profiler.h"    /* Arm Ethos-U NPU profiling functions. */
 #endif /* defined (ARM_NPU) */
 
+#if __cplusplus
+extern "C" {
+#endif
+
 /* Container for timestamp up-counters. */
 typedef struct mps3_pmu_counters_ {
     uint32_t    counter_1Hz;
@@ -54,10 +58,15 @@ void platform_get_counters(pmu_counters* counters);
  * @return Clock rate in Hz expressed as 32 bit unsigned integer.
  */
 uint32_t get_mps3_core_clock(void);
+uint32_t GetSystemCoreClock(void);
 
 /**
  * @brief   System tick interrupt handler.
  **/
 void SysTick_Handler(void);
+
+#if __cplusplus
+}
+#endif
 
 #endif /* TIMER_MPS3_H */

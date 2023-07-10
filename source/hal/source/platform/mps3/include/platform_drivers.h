@@ -23,8 +23,10 @@
 /* Platform components */
 #include "RTE_Components.h" /* For CPU related defintiions */
 #include "timer_mps3.h"     /* Timer functions. */
-#include "user_input.h"     /* User input function */
-#include "lcd_img.h"        /* LCD functions. */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  * @brief   Initialises the platform components.
@@ -42,5 +44,9 @@ void platform_release(void);
  * @return  Pointer to the name
  */
 const char* platform_name(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* PLATFORM_DRIVERS_H */

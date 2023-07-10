@@ -27,7 +27,7 @@ static const char* unit_ms = "milliseconds";
  * @brief   Gets the system tick triggered cycle counter for the CPU.
  * @return  64-bit counter value.
  **/
-static uint64_t Get_SysTick_Cycle_Count(void);
+uint64_t Get_SysTick_Cycle_Count(void);
 
 /**
  * SysTick initialisation
@@ -136,7 +136,7 @@ void platform_get_counters(pmu_counters* counters)
 
 uint32_t get_mps3_core_clock(void)
 {
-    const uint32_t default_clock = 32000000 /* 32 MHz clock */;
+    const uint32_t default_clock = SYSTEM_CORE_CLOCK;
     static int warned_once = 0;
     if (0 != MPS3_SCC->CFG_ACLK) {
         return MPS3_SCC->CFG_ACLK;
@@ -149,6 +149,10 @@ uint32_t get_mps3_core_clock(void)
     }
     return default_clock;
 }
+uint32_t GetSystemCoreClock(void)
+{
+    return get_mps3_core_clock();
+}
 
 void SysTick_Handler(void)
 {
@@ -159,7 +163,7 @@ void SysTick_Handler(void)
 /**
  * Gets the current SysTick derived counter value
  */
-static uint64_t Get_SysTick_Cycle_Count(void)
+uint64_t Get_SysTick_Cycle_Count(void)
 {
     uint32_t systick_val;
 
